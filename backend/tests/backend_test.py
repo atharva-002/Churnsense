@@ -52,6 +52,27 @@ def test_models(session):
             assert f in m, f"{m.get('model')} missing {f}"
 
 
+def test_models_feature_importance_signed_and_merged(session):
+    """Iteration 2: feature_importance for Logistic Regression must
+    (a) include a 'signed' field on each row and
+    (b) have the 7 '<svc>_No internet service' dummies merged into at most one
+        aggregated 'No internet service' entry."""
+    r = session.get(f"{API}/models")
+    assert r.status_code == 200
+    d = r.json()
+    lr = next((m for m in d["models"] if m["model"] == "Logistic Regression"), None)
+    assert lr is not None
+    fi = lr["feature_importance"]
+    assert len(fi) > 0
+    assert "signed" in fi[0], f"first FI row missing 'signed': {fi[0]}"
+    # merged: no more than one row that *equals* 'No internet service' and
+    # ZERO raw '<svc>_No internet service' leftovers
+    raw_leftovers = [row["feature"] for row in fi if row["feature"].endswith("_No internet service")]
+    assert raw_leftovers == [], f"unmerged dummies still present: {raw_leftovers}"
+    aggregated = [row["feature"] for row in fi if row["feature"] == "No internet service"]
+    assert len(aggregated) <= 1
+
+
 # --- Features -------------------------------------------------------------
 def test_features(session):
     r = session.get(f"{API}/features")
