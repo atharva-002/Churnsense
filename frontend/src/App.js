@@ -8,6 +8,7 @@ import Predict from "@/pages/Predict";
 import BatchPredict from "@/pages/BatchPredict";
 import About from "@/pages/About";
 import { Toaster } from "@/components/ui/sonner";
+import { WakingBanner } from "@/components/WakingBanner";
 
 const NAV = [
   { to: "/", label: "Overview", icon: Activity, end: true, testid: "nav-overview" },
@@ -104,6 +105,7 @@ function Shell({ children }) {
 
       <main className="flex-1">{children}</main>
 
+      <WakingBanner />
       <Toaster richColors position="top-right" />
     </div>
   );

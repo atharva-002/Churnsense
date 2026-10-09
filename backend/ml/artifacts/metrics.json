@@ -419,19 +419,19 @@
       ]
     },
     {
-      "accuracy": 0.7477,
-      "precision": 0.5175,
-      "recall": 0.7513,
-      "f1": 0.6129,
-      "roc_auc": 0.8278,
+      "accuracy": 0.747,
+      "precision": 0.5167,
+      "recall": 0.746,
+      "f1": 0.6105,
+      "roc_auc": 0.8291,
       "confusion_matrix": [
         [
-          771,
-          262
+          772,
+          261
         ],
         [
-          93,
-          281
+          95,
+          279
         ]
       ],
       "roc_curve": [
@@ -440,167 +440,155 @@
           "tpr": 0.0
         },
         {
-          "fpr": 0.0019,
-          "tpr": 0.0722
+          "fpr": 0.001,
+          "tpr": 0.0267
         },
         {
-          "fpr": 0.0039,
-          "tpr": 0.1043
+          "fpr": 0.0029,
+          "tpr": 0.0775
         },
         {
-          "fpr": 0.0068,
-          "tpr": 0.123
+          "fpr": 0.0058,
+          "tpr": 0.1123
+        },
+        {
+          "fpr": 0.0087,
+          "tpr": 0.1337
         },
         {
           "fpr": 0.0106,
-          "tpr": 0.1631
+          "tpr": 0.1711
         },
         {
-          "fpr": 0.0155,
-          "tpr": 0.1925
+          "fpr": 0.0145,
+          "tpr": 0.1845
         },
         {
           "fpr": 0.0194,
-          "tpr": 0.2005
+          "tpr": 0.1979
         },
         {
-          "fpr": 0.0223,
-          "tpr": 0.2193
+          "fpr": 0.0232,
+          "tpr": 0.2353
         },
         {
-          "fpr": 0.0252,
-          "tpr": 0.2299
+          "fpr": 0.0271,
+          "tpr": 0.246
         },
         {
-          "fpr": 0.029,
-          "tpr": 0.2513
+          "fpr": 0.0319,
+          "tpr": 0.2995
         },
         {
-          "fpr": 0.031,
-          "tpr": 0.2701
-        },
-        {
-          "fpr": 0.0358,
-          "tpr": 0.2861
-        },
-        {
-          "fpr": 0.0387,
-          "tpr": 0.2941
+          "fpr": 0.0378,
+          "tpr": 0.3102
         },
         {
           "fpr": 0.0416,
-          "tpr": 0.3262
+          "tpr": 0.3342
         },
         {
-          "fpr": 0.0523,
-          "tpr": 0.3396
+          "fpr": 0.0542,
+          "tpr": 0.3503
         },
         {
-          "fpr": 0.0561,
-          "tpr": 0.3476
+          "fpr": 0.0629,
+          "tpr": 0.3797
         },
         {
-          "fpr": 0.0581,
-          "tpr": 0.3583
+          "fpr": 0.0687,
+          "tpr": 0.3904
         },
         {
-          "fpr": 0.0639,
-          "tpr": 0.369
+          "fpr": 0.0774,
+          "tpr": 0.4011
         },
         {
-          "fpr": 0.0678,
-          "tpr": 0.377
+          "fpr": 0.0813,
+          "tpr": 0.4144
         },
         {
-          "fpr": 0.0697,
-          "tpr": 0.393
+          "fpr": 0.0852,
+          "tpr": 0.4251
         },
         {
-          "fpr": 0.0745,
-          "tpr": 0.4064
+          "fpr": 0.0871,
+          "tpr": 0.4358
         },
         {
-          "fpr": 0.0794,
-          "tpr": 0.4198
+          "fpr": 0.0929,
+          "tpr": 0.4626
         },
         {
-          "fpr": 0.0833,
-          "tpr": 0.4305
+          "fpr": 0.0968,
+          "tpr": 0.4706
         },
         {
-          "fpr": 0.0881,
-          "tpr": 0.4412
+          "fpr": 0.0997,
+          "tpr": 0.4786
         },
         {
-          "fpr": 0.09,
-          "tpr": 0.4519
-        },
-        {
-          "fpr": 0.0958,
-          "tpr": 0.4679
-        },
-        {
-          "fpr": 0.1026,
-          "tpr": 0.4733
-        },
-        {
-          "fpr": 0.1075,
-          "tpr": 0.4813
-        },
-        {
-          "fpr": 0.1123,
-          "tpr": 0.492
+          "fpr": 0.1036,
+          "tpr": 0.484
         },
         {
           "fpr": 0.1162,
-          "tpr": 0.5053
+          "tpr": 0.5107
         },
         {
-          "fpr": 0.122,
-          "tpr": 0.5321
+          "fpr": 0.1191,
+          "tpr": 0.516
         },
         {
-          "fpr": 0.1288,
-          "tpr": 0.5401
+          "fpr": 0.1239,
+          "tpr": 0.5267
         },
         {
-          "fpr": 0.1317,
+          "fpr": 0.1258,
+          "tpr": 0.5455
+        },
+        {
+          "fpr": 0.1326,
           "tpr": 0.5508
         },
         {
-          "fpr": 0.1375,
+          "fpr": 0.1355,
           "tpr": 0.5642
         },
         {
-          "fpr": 0.151,
+          "fpr": 0.1413,
           "tpr": 0.5695
         },
         {
-          "fpr": 0.1539,
-          "tpr": 0.5829
+          "fpr": 0.1462,
+          "tpr": 0.5775
         },
         {
-          "fpr": 0.1588,
+          "fpr": 0.1549,
           "tpr": 0.5882
         },
         {
-          "fpr": 0.1607,
-          "tpr": 0.6043
+          "fpr": 0.1588,
+          "tpr": 0.607
         },
         {
-          "fpr": 0.1713,
+          "fpr": 0.1626,
+          "tpr": 0.623
+        },
+        {
+          "fpr": 0.1684,
           "tpr": 0.6337
         },
         {
-          "fpr": 0.1762,
-          "tpr": 0.6417
+          "fpr": 0.1752,
+          "tpr": 0.6471
         },
         {
-          "fpr": 0.1791,
-          "tpr": 0.6604
+          "fpr": 0.1801,
+          "tpr": 0.6551
         },
         {
-          "fpr": 0.1868,
+          "fpr": 0.1897,
           "tpr": 0.6658
         },
         {
@@ -608,148 +596,160 @@
           "tpr": 0.6791
         },
         {
-          "fpr": 0.2014,
+          "fpr": 0.2072,
           "tpr": 0.6925
         },
         {
-          "fpr": 0.2072,
-          "tpr": 0.6979
+          "fpr": 0.2149,
+          "tpr": 0.7032
         },
         {
-          "fpr": 0.2178,
-          "tpr": 0.7059
+          "fpr": 0.2236,
+          "tpr": 0.7139
         },
         {
-          "fpr": 0.2197,
-          "tpr": 0.7166
+          "fpr": 0.2314,
+          "tpr": 0.7193
         },
         {
-          "fpr": 0.2275,
-          "tpr": 0.7219
+          "fpr": 0.2343,
+          "tpr": 0.7246
         },
         {
-          "fpr": 0.2372,
-          "tpr": 0.7353
+          "fpr": 0.2469,
+          "tpr": 0.7326
         },
         {
-          "fpr": 0.242,
-          "tpr": 0.7487
+          "fpr": 0.2517,
+          "tpr": 0.738
         },
         {
-          "fpr": 0.2633,
-          "tpr": 0.754
+          "fpr": 0.2536,
+          "tpr": 0.7513
         },
         {
-          "fpr": 0.2672,
-          "tpr": 0.7674
+          "fpr": 0.274,
+          "tpr": 0.762
         },
         {
-          "fpr": 0.273,
-          "tpr": 0.7754
+          "fpr": 0.2807,
+          "tpr": 0.7701
         },
         {
-          "fpr": 0.2972,
-          "tpr": 0.7807
+          "fpr": 0.2894,
+          "tpr": 0.7781
         },
         {
-          "fpr": 0.3136,
-          "tpr": 0.7914
+          "fpr": 0.2982,
+          "tpr": 0.7861
         },
         {
-          "fpr": 0.3214,
-          "tpr": 0.8075
+          "fpr": 0.3049,
+          "tpr": 0.7941
         },
         {
-          "fpr": 0.3272,
+          "fpr": 0.3098,
+          "tpr": 0.7995
+        },
+        {
+          "fpr": 0.3185,
           "tpr": 0.8128
         },
         {
-          "fpr": 0.3301,
+          "fpr": 0.3253,
           "tpr": 0.8209
         },
         {
-          "fpr": 0.3446,
-          "tpr": 0.8289
+          "fpr": 0.3388,
+          "tpr": 0.8262
         },
         {
-          "fpr": 0.365,
+          "fpr": 0.3437,
           "tpr": 0.8396
         },
         {
-          "fpr": 0.3717,
-          "tpr": 0.8503
+          "fpr": 0.3679,
+          "tpr": 0.8449
         },
         {
-          "fpr": 0.3853,
+          "fpr": 0.3737,
+          "tpr": 0.8529
+        },
+        {
+          "fpr": 0.395,
           "tpr": 0.8583
         },
         {
-          "fpr": 0.4008,
-          "tpr": 0.8663
+          "fpr": 0.3998,
+          "tpr": 0.8636
         },
         {
-          "fpr": 0.4037,
-          "tpr": 0.8743
+          "fpr": 0.4027,
+          "tpr": 0.8717
         },
         {
-          "fpr": 0.425,
-          "tpr": 0.885
+          "fpr": 0.4124,
+          "tpr": 0.877
         },
         {
-          "fpr": 0.4288,
-          "tpr": 0.893
+          "fpr": 0.4182,
+          "tpr": 0.8904
         },
         {
-          "fpr": 0.4414,
-          "tpr": 0.9037
+          "fpr": 0.4269,
+          "tpr": 0.9011
         },
         {
-          "fpr": 0.454,
-          "tpr": 0.9118
+          "fpr": 0.4385,
+          "tpr": 0.9091
         },
         {
-          "fpr": 0.4792,
-          "tpr": 0.9198
+          "fpr": 0.4676,
+          "tpr": 0.9144
         },
         {
-          "fpr": 0.5102,
-          "tpr": 0.9278
+          "fpr": 0.4773,
+          "tpr": 0.9251
         },
         {
-          "fpr": 0.5344,
+          "fpr": 0.5044,
           "tpr": 0.9332
         },
         {
-          "fpr": 0.5431,
-          "tpr": 0.9439
+          "fpr": 0.5305,
+          "tpr": 0.9385
         },
         {
-          "fpr": 0.5586,
-          "tpr": 0.9492
+          "fpr": 0.544,
+          "tpr": 0.9465
         },
         {
-          "fpr": 0.5837,
+          "fpr": 0.576,
+          "tpr": 0.9519
+        },
+        {
+          "fpr": 0.5818,
           "tpr": 0.9599
         },
         {
-          "fpr": 0.5934,
+          "fpr": 0.5866,
           "tpr": 0.9679
         },
         {
-          "fpr": 0.6379,
-          "tpr": 0.9733
+          "fpr": 0.6515,
+          "tpr": 0.9759
         },
         {
-          "fpr": 0.6931,
-          "tpr": 0.9813
+          "fpr": 0.7076,
+          "tpr": 0.984
         },
         {
-          "fpr": 0.727,
+          "fpr": 0.8238,
           "tpr": 0.9893
         },
         {
-          "fpr": 0.8712,
-          "tpr": 0.9947
+          "fpr": 0.8674,
+          "tpr": 0.9973
         },
         {
           "fpr": 1.0,
@@ -760,95 +760,95 @@
       "feature_importance": [
         {
           "feature": "Contract_Month-to-month",
-          "importance": 0.376,
-          "signed": 0.376
+          "importance": 0.3709,
+          "signed": 0.3709
         },
         {
           "feature": "InternetService_Fiber optic",
-          "importance": 0.1046,
-          "signed": 0.1046
+          "importance": 0.1079,
+          "signed": 0.1079
+        },
+        {
+          "feature": "TechSupport_No",
+          "importance": 0.0472,
+          "signed": 0.0472
         },
         {
           "feature": "OnlineSecurity_No",
-          "importance": 0.0678,
-          "signed": 0.0678
+          "importance": 0.0468,
+          "signed": 0.0468
         },
         {
           "feature": "Contract_Two year",
+          "importance": 0.0356,
+          "signed": 0.0356
+        },
+        {
+          "feature": "InternetService_DSL",
           "importance": 0.0314,
           "signed": 0.0314
         },
         {
-          "feature": "InternetService_No",
-          "importance": 0.0269,
-          "signed": 0.0269
-        },
-        {
-          "feature": "InternetService_DSL",
-          "importance": 0.026,
-          "signed": 0.026
-        },
-        {
-          "feature": "TechSupport_No",
-          "importance": 0.0249,
-          "signed": 0.0249
+          "feature": "PhoneService_Yes",
+          "importance": 0.0256,
+          "signed": 0.0256
         },
         {
           "feature": "Contract_One year",
-          "importance": 0.0239,
-          "signed": 0.0239
+          "importance": 0.0227,
+          "signed": 0.0227
         },
         {
-          "feature": "PhoneService_Yes",
-          "importance": 0.0207,
-          "signed": 0.0207
+          "feature": "InternetService_No",
+          "importance": 0.0216,
+          "signed": 0.0216
         },
         {
           "feature": "StreamingMovies_Yes",
-          "importance": 0.0184,
-          "signed": 0.0184
-        },
-        {
-          "feature": "PaymentMethod_Electronic check",
-          "importance": 0.0154,
-          "signed": 0.0154
+          "importance": 0.0212,
+          "signed": 0.0212
         },
         {
           "feature": "tenure",
-          "importance": 0.0154,
-          "signed": 0.0154
+          "importance": 0.0148,
+          "signed": 0.0148
         },
         {
-          "feature": "StreamingTV_Yes",
-          "importance": 0.0138,
-          "signed": 0.0138
+          "feature": "PaymentMethod_Electronic check",
+          "importance": 0.0148,
+          "signed": 0.0148
         },
         {
           "feature": "PhoneService_No",
-          "importance": 0.0137,
-          "signed": 0.0137
+          "importance": 0.0145,
+          "signed": 0.0145
         },
         {
-          "feature": "OnlineBackup_No",
-          "importance": 0.013,
-          "signed": 0.013
+          "feature": "StreamingTV_Yes",
+          "importance": 0.0136,
+          "signed": 0.0136
+        },
+        {
+          "feature": "MultipleLines_No",
+          "importance": 0.0112,
+          "signed": 0.0112
         }
       ]
     },
     {
-      "accuracy": 0.7498,
-      "precision": 0.5207,
-      "recall": 0.7406,
-      "f1": 0.6115,
-      "roc_auc": 0.8257,
+      "accuracy": 0.7754,
+      "precision": 0.565,
+      "recall": 0.6738,
+      "f1": 0.6146,
+      "roc_auc": 0.8274,
       "confusion_matrix": [
         [
-          778,
-          255
+          839,
+          194
         ],
         [
-          97,
-          277
+          122,
+          252
         ]
       ],
       "roc_curve": [
@@ -857,315 +857,315 @@
           "tpr": 0.0
         },
         {
-          "fpr": 0.0019,
-          "tpr": 0.0214
+          "fpr": 0.0039,
+          "tpr": 0.0374
         },
         {
-          "fpr": 0.0048,
-          "tpr": 0.0749
-        },
-        {
-          "fpr": 0.0077,
-          "tpr": 0.0936
+          "fpr": 0.0068,
+          "tpr": 0.0642
         },
         {
           "fpr": 0.0097,
-          "tpr": 0.1203
+          "tpr": 0.1043
         },
         {
-          "fpr": 0.0126,
+          "fpr": 0.0116,
           "tpr": 0.131
         },
         {
-          "fpr": 0.0174,
-          "tpr": 0.1471
+          "fpr": 0.0145,
+          "tpr": 0.139
         },
         {
-          "fpr": 0.0223,
-          "tpr": 0.1791
+          "fpr": 0.0184,
+          "tpr": 0.1604
         },
         {
-          "fpr": 0.0242,
-          "tpr": 0.2086
+          "fpr": 0.0213,
+          "tpr": 0.1979
+        },
+        {
+          "fpr": 0.0261,
+          "tpr": 0.2166
         },
         {
           "fpr": 0.03,
-          "tpr": 0.2433
+          "tpr": 0.2513
         },
         {
-          "fpr": 0.0329,
-          "tpr": 0.254
+          "fpr": 0.0339,
+          "tpr": 0.2647
         },
         {
-          "fpr": 0.0358,
-          "tpr": 0.2754
+          "fpr": 0.0407,
+          "tpr": 0.2781
         },
         {
-          "fpr": 0.0378,
-          "tpr": 0.2914
+          "fpr": 0.0436,
+          "tpr": 0.2968
         },
         {
-          "fpr": 0.0416,
-          "tpr": 0.3128
+          "fpr": 0.0465,
+          "tpr": 0.3182
         },
         {
-          "fpr": 0.0445,
-          "tpr": 0.3316
-        },
-        {
-          "fpr": 0.0523,
-          "tpr": 0.3476
+          "fpr": 0.0494,
+          "tpr": 0.3369
         },
         {
           "fpr": 0.0552,
-          "tpr": 0.3663
+          "tpr": 0.3556
+        },
+        {
+          "fpr": 0.0581,
+          "tpr": 0.3636
         },
         {
           "fpr": 0.061,
-          "tpr": 0.3797
+          "tpr": 0.377
         },
         {
-          "fpr": 0.0649,
-          "tpr": 0.3877
+          "fpr": 0.0639,
+          "tpr": 0.4037
         },
         {
-          "fpr": 0.0697,
-          "tpr": 0.4091
+          "fpr": 0.0658,
+          "tpr": 0.4225
         },
         {
           "fpr": 0.0774,
-          "tpr": 0.4198
+          "tpr": 0.4305
         },
         {
-          "fpr": 0.0842,
-          "tpr": 0.4412
+          "fpr": 0.0813,
+          "tpr": 0.4358
         },
         {
-          "fpr": 0.0881,
+          "fpr": 0.0871,
           "tpr": 0.4492
         },
         {
           "fpr": 0.091,
-          "tpr": 0.4599
-        },
-        {
-          "fpr": 0.0958,
-          "tpr": 0.4733
-        },
-        {
-          "fpr": 0.1026,
           "tpr": 0.4813
         },
         {
-          "fpr": 0.1084,
-          "tpr": 0.4973
+          "fpr": 0.0978,
+          "tpr": 0.4893
         },
         {
-          "fpr": 0.1113,
-          "tpr": 0.508
+          "fpr": 0.1045,
+          "tpr": 0.5027
         },
         {
-          "fpr": 0.1162,
-          "tpr": 0.5241
+          "fpr": 0.1094,
+          "tpr": 0.516
         },
         {
-          "fpr": 0.1229,
-          "tpr": 0.5348
+          "fpr": 0.1133,
+          "tpr": 0.5267
         },
         {
-          "fpr": 0.1288,
-          "tpr": 0.5455
+          "fpr": 0.1268,
+          "tpr": 0.5321
         },
         {
-          "fpr": 0.1317,
-          "tpr": 0.5668
+          "fpr": 0.1297,
+          "tpr": 0.5561
+        },
+        {
+          "fpr": 0.1365,
+          "tpr": 0.5615
         },
         {
           "fpr": 0.1423,
-          "tpr": 0.5775
+          "tpr": 0.5722
+        },
+        {
+          "fpr": 0.1442,
+          "tpr": 0.5802
         },
         {
           "fpr": 0.1481,
-          "tpr": 0.5909
+          "tpr": 0.5882
         },
         {
-          "fpr": 0.1568,
+          "fpr": 0.1559,
+          "tpr": 0.5963
+        },
+        {
+          "fpr": 0.1597,
           "tpr": 0.6043
         },
         {
-          "fpr": 0.1636,
-          "tpr": 0.6123
+          "fpr": 0.1646,
+          "tpr": 0.615
         },
         {
-          "fpr": 0.1723,
+          "fpr": 0.1675,
           "tpr": 0.623
         },
         {
-          "fpr": 0.1752,
+          "fpr": 0.1713,
           "tpr": 0.631
         },
         {
-          "fpr": 0.183,
-          "tpr": 0.6471
+          "fpr": 0.1742,
+          "tpr": 0.6417
         },
         {
-          "fpr": 0.1878,
+          "fpr": 0.1801,
           "tpr": 0.6578
         },
         {
-          "fpr": 0.1936,
-          "tpr": 0.6684
+          "fpr": 0.1849,
+          "tpr": 0.6658
         },
         {
-          "fpr": 0.2033,
+          "fpr": 0.1936,
+          "tpr": 0.6791
+        },
+        {
+          "fpr": 0.1975,
           "tpr": 0.6898
         },
         {
-          "fpr": 0.2091,
-          "tpr": 0.7005
+          "fpr": 0.2043,
+          "tpr": 0.6979
         },
         {
-          "fpr": 0.2217,
-          "tpr": 0.7059
+          "fpr": 0.2197,
+          "tpr": 0.7086
         },
         {
-          "fpr": 0.2352,
-          "tpr": 0.7166
+          "fpr": 0.2294,
+          "tpr": 0.7246
         },
         {
-          "fpr": 0.2401,
-          "tpr": 0.7326
+          "fpr": 0.2449,
+          "tpr": 0.7353
         },
         {
-          "fpr": 0.2469,
-          "tpr": 0.7406
+          "fpr": 0.2536,
+          "tpr": 0.7433
         },
         {
-          "fpr": 0.2604,
-          "tpr": 0.746
+          "fpr": 0.2633,
+          "tpr": 0.7594
         },
         {
-          "fpr": 0.2701,
-          "tpr": 0.754
+          "fpr": 0.2682,
+          "tpr": 0.7701
         },
         {
-          "fpr": 0.2749,
-          "tpr": 0.7647
+          "fpr": 0.2798,
+          "tpr": 0.7914
         },
         {
-          "fpr": 0.2778,
-          "tpr": 0.7834
+          "fpr": 0.2904,
+          "tpr": 0.7968
         },
         {
-          "fpr": 0.2846,
-          "tpr": 0.7888
+          "fpr": 0.2972,
+          "tpr": 0.8048
         },
         {
-          "fpr": 0.2943,
-          "tpr": 0.7995
+          "fpr": 0.3011,
+          "tpr": 0.8182
         },
         {
-          "fpr": 0.2982,
-          "tpr": 0.8075
+          "fpr": 0.3088,
+          "tpr": 0.8262
         },
         {
-          "fpr": 0.304,
-          "tpr": 0.8128
+          "fpr": 0.3398,
+          "tpr": 0.8316
         },
         {
-          "fpr": 0.3156,
-          "tpr": 0.8209
-        },
-        {
-          "fpr": 0.3233,
-          "tpr": 0.8289
-        },
-        {
-          "fpr": 0.334,
+          "fpr": 0.3466,
           "tpr": 0.8396
         },
         {
-          "fpr": 0.3388,
-          "tpr": 0.8449
+          "fpr": 0.363,
+          "tpr": 0.8476
         },
         {
-          "fpr": 0.3882,
-          "tpr": 0.8556
+          "fpr": 0.3766,
+          "tpr": 0.8529
         },
         {
-          "fpr": 0.394,
-          "tpr": 0.8636
+          "fpr": 0.3843,
+          "tpr": 0.861
         },
         {
-          "fpr": 0.4056,
-          "tpr": 0.8717
+          "fpr": 0.393,
+          "tpr": 0.869
         },
         {
-          "fpr": 0.4124,
-          "tpr": 0.877
+          "fpr": 0.4085,
+          "tpr": 0.8797
         },
         {
-          "fpr": 0.4434,
+          "fpr": 0.4288,
           "tpr": 0.885
         },
         {
-          "fpr": 0.4656,
+          "fpr": 0.4414,
           "tpr": 0.893
         },
         {
-          "fpr": 0.4773,
+          "fpr": 0.4656,
           "tpr": 0.9011
         },
         {
-          "fpr": 0.484,
-          "tpr": 0.9064
+          "fpr": 0.4782,
+          "tpr": 0.9091
         },
         {
-          "fpr": 0.4918,
-          "tpr": 0.9171
+          "fpr": 0.486,
+          "tpr": 0.9144
         },
         {
-          "fpr": 0.4956,
-          "tpr": 0.9278
+          "fpr": 0.4898,
+          "tpr": 0.9225
         },
         {
-          "fpr": 0.516,
-          "tpr": 0.9358
+          "fpr": 0.5169,
+          "tpr": 0.9332
         },
         {
-          "fpr": 0.5528,
-          "tpr": 0.9412
+          "fpr": 0.5537,
+          "tpr": 0.9385
         },
         {
-          "fpr": 0.5663,
-          "tpr": 0.9519
+          "fpr": 0.5682,
+          "tpr": 0.9465
         },
         {
-          "fpr": 0.6196,
-          "tpr": 0.9599
+          "fpr": 0.5799,
+          "tpr": 0.9545
         },
         {
-          "fpr": 0.6418,
-          "tpr": 0.9679
+          "fpr": 0.6254,
+          "tpr": 0.9652
         },
         {
-          "fpr": 0.7357,
-          "tpr": 0.9733
+          "fpr": 0.7028,
+          "tpr": 0.9706
         },
         {
-          "fpr": 0.7551,
+          "fpr": 0.7299,
           "tpr": 0.9813
         },
         {
-          "fpr": 0.7638,
+          "fpr": 0.7531,
           "tpr": 0.9893
         },
         {
-          "fpr": 0.8877,
+          "fpr": 0.9051,
           "tpr": 0.9973
         },
         {
-          "fpr": 0.97,
+          "fpr": 0.9584,
           "tpr": 1.0
         },
         {
@@ -1177,43 +1177,43 @@
       "feature_importance": [
         {
           "feature": "tenure",
-          "importance": 0.1255,
-          "signed": 0.1255
+          "importance": 0.1275,
+          "signed": 0.1275
         },
         {
           "feature": "TotalCharges",
-          "importance": 0.113,
-          "signed": 0.113
+          "importance": 0.114,
+          "signed": 0.114
         },
         {
           "feature": "Contract_Month-to-month",
-          "importance": 0.1093,
-          "signed": 0.1093
+          "importance": 0.1034,
+          "signed": 0.1034
         },
         {
           "feature": "MonthlyCharges",
-          "importance": 0.0908,
-          "signed": 0.0908
+          "importance": 0.0926,
+          "signed": 0.0926
         },
         {
           "feature": "Contract_Two year",
-          "importance": 0.052,
-          "signed": 0.052
+          "importance": 0.0549,
+          "signed": 0.0549
         },
         {
           "feature": "OnlineSecurity_No",
-          "importance": 0.0507,
-          "signed": 0.0507
+          "importance": 0.0469,
+          "signed": 0.0469
         },
         {
           "feature": "TechSupport_No",
-          "importance": 0.0378,
-          "signed": 0.0378
+          "importance": 0.0384,
+          "signed": 0.0384
         },
         {
           "feature": "InternetService_Fiber optic",
-          "importance": 0.037,
-          "signed": 0.037
+          "importance": 0.0341,
+          "signed": 0.0341
         },
         {
           "feature": "PaymentMethod_Electronic check",
@@ -1222,33 +1222,33 @@
         },
         {
           "feature": "Contract_One year",
-          "importance": 0.0177,
-          "signed": 0.0177
+          "importance": 0.0192,
+          "signed": 0.0192
         },
         {
           "feature": "OnlineBackup_No",
-          "importance": 0.0177,
-          "signed": 0.0177
+          "importance": 0.0168,
+          "signed": 0.0168
         },
         {
           "feature": "InternetService_DSL",
-          "importance": 0.0148,
-          "signed": 0.0148
-        },
-        {
-          "feature": "DeviceProtection_No",
-          "importance": 0.0139,
-          "signed": 0.0139
+          "importance": 0.0144,
+          "signed": 0.0144
         },
         {
           "feature": "OnlineSecurity_Yes",
-          "importance": 0.0135,
-          "signed": 0.0135
+          "importance": 0.0143,
+          "signed": 0.0143
         },
         {
-          "feature": "PaperlessBilling_Yes",
-          "importance": 0.0126,
-          "signed": 0.0126
+          "feature": "DeviceProtection_No",
+          "importance": 0.0133,
+          "signed": 0.0133
+        },
+        {
+          "feature": "PaperlessBilling_No",
+          "importance": 0.0133,
+          "signed": 0.0133
         }
       ]
     }

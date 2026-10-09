@@ -137,25 +137,59 @@ All routes are prefixed with `/api`:
 # 1. Backend
 cd backend
 pip install -r requirements.txt
-python ml/train.py              # trains models, writes artifacts
+# (optional) retrain the models:
+#   pip install -r requirements-train.txt
+#   python ml/train.py
 uvicorn server:app --reload --port 8001
 
 # 2. Frontend (in a second terminal)
 cd frontend
 yarn install
+# edit frontend/.env (REACT_APP_BACKEND_URL=http://localhost:8001)
 yarn start                      # → http://localhost:3000
 ```
 
-Set `REACT_APP_BACKEND_URL` in `frontend/.env` to your backend URL.
+## 12. Deploy for Free
 
-## 12. Interview Pointers
+ChurnSense is split into two zero-cost deployments: **FastAPI → Render** and **React → Vercel**.
+
+### A. Backend on Render (free web service)
+
+1. Push this repo to GitHub.
+2. In the [Render dashboard](https://dashboard.render.com), click **New → Blueprint** and point it at your repo. Render will auto-detect [`render.yaml`](./render.yaml) and create a web service named `churnsense-api`.
+   - If you prefer manual: **New → Web Service**, pick the repo, set **Root Directory** to `backend`, Runtime **Python 3**, Build `pip install -r requirements.txt`, Start `uvicorn server:app --host 0.0.0.0 --port $PORT`, Plan **Free**.
+3. (Optional) In **Environment**, add `CORS_ORIGINS` set to your Vercel URL (e.g. `https://churnsense.vercel.app`). Default `*` works too.
+4. Deploy. You'll get a URL like `https://churnsense-api.onrender.com`. Open `/api/` to confirm it returns `{"app":"ChurnSense","status":"ok",...}`.
+
+> ⚠️ **Render free tier sleeps after 15 min of inactivity.** The first request after sleep takes ~30-50 seconds to wake. The frontend already handles this gracefully with a *"Waking up the server…"* banner and automatic retries.
+
+### B. Frontend on Vercel
+
+1. In the [Vercel dashboard](https://vercel.com/new), **Import** the same repo.
+2. Set:
+   - **Root Directory**: `frontend`
+   - **Framework Preset**: Create React App (auto-detected)
+   - **Environment Variable**: `REACT_APP_BACKEND_URL` = your Render URL from step A (no trailing slash)
+3. Deploy. [`frontend/vercel.json`](./frontend/vercel.json) rewrites every route to `/index.html` so client-side routing on `/predict`, `/models`, `/batch`, `/about` keeps working on hard-refresh.
+
+### C. CORS
+
+Once you have your Vercel URL, update `CORS_ORIGINS` on Render to lock down origins:
+
+```
+CORS_ORIGINS=https://churnsense.vercel.app,https://churnsense-git-main-<you>.vercel.app
+```
+
+Then redeploy the Render service.
+
+## 13. Interview Pointers
 
 - **Why Logistic Regression won** despite tree ensembles being popular: this dataset is small (~7k rows), the signal is largely linear in the standardized features, and class-weighted LR with a good preprocessor is a very strong baseline. The LR is also fully interpretable (we literally read coefficients).
 - **Why class weighting over SMOTE**: faster, deterministic, no synthetic data to defend. Both approaches move the decision boundary in the same direction.
 - **Why ROC-AUC as the tiebreaker**: churn is imbalanced (~27%), and the business cares about ranking at-risk customers to triage — ROC-AUC captures that.
 - **Explainability**: for the chosen linear model, feature coefficients × standardized values give a per-customer, per-feature contribution that's trivial to translate into English.
 
-## 13. Future Work
+## 14. Future Work
 
 - Add SHAP values for a model-agnostic explainer.
 - Hyperparameter search (Optuna) with cross-validation.
