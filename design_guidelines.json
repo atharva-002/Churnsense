@@ -1,0 +1,113 @@
+{
+  "theme": "Light mode prioritized (with dark mode toggle support). ARCHETYPE 4: SWISS & HIGH-CONTRAST (Authority, Clarity, Truth). It evokes a modern SaaS BI tool feeling - stark, clean, highly auditable, focusing heavily on data hierarchy.",
+  "typography": {
+    "fonts": {
+      "headings": "Manrope",
+      "body": "IBM Plex Sans",
+      "mono": "JetBrains Mono"
+    },
+    "rules": [
+      "H1 (Hero/Main Heading): text-4xl sm:text-5xl lg:text-6xl - tracking-tight, font-black.",
+      "H2 (Section Heading): text-2xl sm:text-3xl lg:text-4xl - tracking-tight, font-bold.",
+      "H3 (Widget/Card Heading): text-lg sm:text-xl - font-semibold.",
+      "Overlines/Labels: Uppercase, text-xs, tracking-[0.2em].",
+      "Line Height: leading-none for headings, leading-relaxed for body.",
+      "DO NOT center align the app container. No '.App { text-align: center; }'."
+    ]
+  },
+  "colors": {
+    "background": {
+      "primary": "#F7F7F8",
+      "surface": "#FFFFFF"
+    },
+    "text": {
+      "primary": "#111111",
+      "secondary": "#666666",
+      "muted": "#999999"
+    },
+    "accents": {
+      "brand": "#002FA7", 
+      "churn_high_risk": "#FF2A00",
+      "churn_low_risk": "#046A38",
+      "warning": "#FF5E00"
+    },
+    "rules": [
+      "Never use pure #000000. Tint neutral greys slightly.",
+      "Ensure text meets APCA standards against backgrounds.",
+      "ALWAYS explicitly set text color on hover.",
+      "No generic full-screen gradients. Use solid colors and 1px sharp borders."
+    ]
+  },
+  "visual_enhancers": {
+    "surfaces": "Grid Borders (The Technical Look). Container with border-collapse style layout. Items with subtle borders on right and bottom of every grid item.",
+    "borders": "1px solid #E5E5E5. No soft shadows on cards. Flat, dense, rectangular. Use sharp edges or max 4px border-radius.",
+    "effects": "Use Glassmorphism (Crystal variant) ONLY for sticky headers/navs: backdrop-blur-xl bg-white/70, 1px delicate inner stroke. Do NOT use completely transparent backgrounds for headers."
+  },
+  "components": {
+    "buttons": "Sharp edges, flat design, high contrast. Hover: slight lift (-translate-y-1), subtle shadow. Use lucide-react icons.",
+    "cards": "Flat background, 1px subtle border, no shadow by default. Dense and compact spacing.",
+    "charts": "Use Recharts (via Shadcn if available). Color-blind friendly palettes using the defined accents (Brand Blue for base metrics, Signal Red for churn).",
+    "tables": "Dense rows, clear typography. Use mono font for numbers. Striped or 1px bottom border per row.",
+    "forms": "Shadcn form components. Strict grid alignment.",
+    "toast": "Use Sonner for notifications (e.g., CSV upload success, prediction complete).",
+    "badges": "Sharp rectangles or slight rounding. High contrast background/text depending on risk level."
+  },
+  "grids_layouts": {
+    "spacing_scale": "p-1, p-2, p-4, p-6, p-8, p-12. Containers with borders MUST have internal padding (p-6 or p-8).",
+    "dashboard_grid": "High Density Grid (Mode B). grid-cols-1 md:grid-cols-3 lg:grid-cols-4. gap-4 or gap-6. Every pixel must be utilized. Use h-full on children.",
+    "alignment": "Mobile-first responsive. Left-align paragraphs, labels, inputs, and dense content."
+  },
+  "motion": {
+    "rules": [
+      "Micro-animations on hover states for interactive elements.",
+      "Transition specific properties (e.g., transition-colors, transition-transform). NO 'transition-all'.",
+      "Staggered entrance animations for dashboard widgets using Framer Motion.",
+      "Respect prefers-reduced-motion."
+    ]
+  },
+  "accessibility": {
+    "rules": [
+      "All interactive and key informational elements MUST include a `data-testid` attribute (e.g., data-testid='predict-churn-button').",
+      "Minimum 4.5:1 contrast ratio for normal text.",
+      "Focus states must have HIGHER contrast."
+    ]
+  },
+  "media": {
+    "icons": "lucide-react",
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1644088379091-d574269d422f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA4Mzl8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGRhdGElMjB2aXN1YWxpemF0aW9uJTIwZ2VvbWV0cmljfGVufDB8fHx8MTc5MTU0MzYwM3ww&ixlib=rb-4.1.0&q=85",
+        "description": "Abstract blue geometric data visualization lines",
+        "category": "About Page Hero Background (Use with low opacity or overlay)"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzV8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYWxlJTIwaGVhZHNob3QlMjBwb3J0cmFpdHxlbnwwfHx8fDE3OTE1NDM2MDN8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Professional male headshot",
+        "category": "Placeholder avatar for Atharva Kshirsagar in footer/about page"
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "You are building 'ChurnSense', a Customer Churn Prediction dashboard based on IBM Telco dataset.",
+    "Implement 5 pages/views: EDA Dashboard, Model Performance, Single Predict, Batch Predict (CSV), About.",
+    "Do NOT add an 'Emergent' badge. Do include 'Built by Atharva Kshirsagar' in the footer.",
+    "Use Shadcn UI components heavily but customize them to remove the 'Vercel-look' (make borders 1px sharp, remove soft shadows, use high contrast).",
+    "Create a clean sidebar or topbar navigation. Ensure navigation links are visible on desktop (no hamburger menu on desktop).",
+    "For charts, utilize Recharts. Prioritize KPI widgets at the top left.",
+    "Implement 'data-testid' on ALL interactive elements.",
+    "For the 'Predict' form, use Shadcn form inputs.",
+    "Do NOT center align the main App container. Left align content for readability.",
+    "Do NOT use 'transition: all' in CSS. Target specific properties.",
+    "Include empty-state CTAs or graceful fallbacks for the CSV batch predict before upload.",
+    "Ensure to generate .js files instead of .tsx, as per environment constraints."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Avoid the 'AI slop' aesthetic.",
+    "Create depth through layered design elements (borders, grid layouts) rather than soft shadows.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Add micro-animations for interactions (hover, click, focus). Static = dead.",
+    "NEVER use AI assistant Emoji characters (🤖🧠💭💡🔮🎯) for icons. Use lucide-react.",
+    "NEVER use placeholder URLs (via.placeholder.com). Use the provided Unsplash URLs.",
+    "Always use Sonner for toasts."
+  ]
+}

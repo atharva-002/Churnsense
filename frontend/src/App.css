@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+:root {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+}
+
+body {
+  background: #f7f7f8;
+  color: #111;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: "Manrope", system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-mono, code, .tabular-nums {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Overline / eyebrow label */
+.overline-label {
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: #666;
+}
+
+/* Flat, sharp cards (grid-style borders, no soft shadows) */
+.cs-card {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+}
+.cs-card:focus-within {
+  outline: 2px solid #002fa7;
+  outline-offset: -1px;
+}
+
+.cs-grid {
+  background: #e5e5e5;
+  display: grid;
+  gap: 1px;
+}
+.cs-grid > .cs-grid-item {
+  background: #ffffff;
+}
+
+/* Subtle animated reveal for widgets */
+@keyframes cs-rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.cs-rise { animation: cs-rise 400ms ease-out both; }
+
+/* Scrollbar polish on tables */
+.cs-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
+.cs-scroll::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 2px; }
+.cs-scroll::-webkit-scrollbar-track { background: transparent; }
+
+/* High-contrast focus for interactive elements */
+button:focus-visible, a:focus-visible, [role="button"]:focus-visible {
+  outline: 2px solid #002fa7;
+  outline-offset: 2px;
+}
+
+/* Hide file-input default style; we drive it with a button */
+input[type="file"].cs-file {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+}
