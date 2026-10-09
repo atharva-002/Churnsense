@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
-import { AlertTriangle, Loader2, Sparkles, ShieldCheck, AlertCircle } from "lucide-react";
+import { Loader2, Sparkles, RotateCcw, Lightbulb } from "lucide-react";
+import { RiskPill, RISK_COLOR } from "@/components/RiskPill";
+import { prettyFeature } from "@/lib/labels";
 
 const NUMERIC_LABELS = {
   tenure: "Tenure (months)",
@@ -36,11 +36,58 @@ const CAT_LABELS = {
   PaymentMethod: "Payment Method",
 };
 
-const RISK_META = {
-  High: { color: "#FF2A00", icon: AlertTriangle, label: "High Risk" },
-  Medium: { color: "#FF5E00", icon: AlertCircle, label: "Medium Risk" },
-  Low: { color: "#046A38", icon: ShieldCheck, label: "Low Risk" },
-};
+// SVG gauge: semicircle progress ring
+function Gauge({ percent, color, label }) {
+  const size = 220;
+  const stroke = 18;
+  const r = (size - stroke) / 2;
+  const circ = Math.PI * r; // half circle
+  const clamped = Math.max(0, Math.min(100, percent));
+  const dash = (clamped / 100) * circ;
+  const cx = size / 2;
+  const cy = size / 2;
+  return (
+    <div className="relative w-full flex items-center justify-center" data-testid="predict-gauge">
+      <svg width={size} height={size / 2 + 20} viewBox={`0 0 ${size} ${size / 2 + 20}`}>
+        <defs>
+          <linearGradient id="gauge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor={color} stopOpacity="0.75" />
+            <stop offset="100%" stopColor={color} stopOpacity="1" />
+          </linearGradient>
+        </defs>
+        {/* track */}
+        <path
+          d={`M ${stroke / 2} ${cy} A ${r} ${r} 0 0 1 ${size - stroke / 2} ${cy}`}
+          fill="none"
+          stroke="#F1F5F9"
+          strokeWidth={stroke}
+          strokeLinecap="round"
+        />
+        {/* progress */}
+        <path
+          d={`M ${stroke / 2} ${cy} A ${r} ${r} 0 0 1 ${size - stroke / 2} ${cy}`}
+          fill="none"
+          stroke="url(#gauge-grad)"
+          strokeWidth={stroke}
+          strokeLinecap="round"
+          strokeDasharray={`${dash} ${circ}`}
+          style={{ transition: "stroke-dasharray 500ms cubic-bezier(0.16,1,0.3,1)" }}
+        />
+      </svg>
+      <div className="absolute inset-x-0 top-9 flex flex-col items-center">
+        <div
+          className="font-[Manrope] font-black text-5xl tabular-nums leading-none"
+          style={{ color }}
+          data-testid="predict-probability"
+        >
+          {clamped.toFixed(1)}
+          <span className="text-2xl">%</span>
+        </div>
+        <div className="text-[11px] uppercase tracking-[0.14em] text-slate-500 mt-2">{label}</div>
+      </div>
+    </div>
+  );
+}
 
 export default function Predict() {
   const [schema, setSchema] = useState(null);
@@ -57,7 +104,7 @@ export default function Predict() {
       .catch((e) => toast.error(e.message || "Could not load form schema"));
   }, []);
 
-  const risk = useMemo(() => (result ? RISK_META[result.risk_level] : null), [result]);
+  const riskColor = useMemo(() => (result ? RISK_COLOR[result.risk_level] : "#64748B"), [result]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -87,8 +134,11 @@ export default function Predict() {
   if (!schema)
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 space-y-6">
-        <Skeleton className="h-10 w-72" />
-        <Skeleton className="h-96" />
+        <Skeleton className="h-10 w-72 rounded-lg" />
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+          <Skeleton className="h-[600px] rounded-xl lg:col-span-3" />
+          <Skeleton className="h-[600px] rounded-xl lg:col-span-2" />
+        </div>
       </div>
     );
 
@@ -96,7 +146,7 @@ export default function Predict() {
   const categoricalKeys = Object.keys(schema.categorical);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10" data-testid="predict-page">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10" data-testid="predict-page">
       <SectionHeader
         eyebrow="Single customer scoring"
         title="Predict Churn"
@@ -113,7 +163,7 @@ export default function Predict() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {numericKeys.map((k) => (
               <div key={k} className="flex flex-col gap-1.5">
-                <Label htmlFor={`in-${k}`} className="text-xs text-[#666] uppercase tracking-[0.1em]">
+                <Label htmlFor={`in-${k}`} className="text-[11px] text-slate-500 uppercase tracking-[0.08em] font-semibold">
                   {NUMERIC_LABELS[k] || k}
                 </Label>
                 <Input
@@ -124,13 +174,13 @@ export default function Predict() {
                   data-testid={`input-${k}`}
                   value={form[k] ?? ""}
                   onChange={(e) => setForm((f) => ({ ...f, [k]: e.target.value }))}
-                  className="rounded-none border-[#E5E5E5] focus-visible:ring-0 focus-visible:border-[#002FA7] font-mono"
+                  className="rounded-lg border-slate-200 focus-visible:ring-2 focus-visible:ring-indigo-200 focus-visible:border-indigo-400 font-mono"
                 />
               </div>
             ))}
             {categoricalKeys.map((k) => (
               <div key={k} className="flex flex-col gap-1.5">
-                <Label className="text-xs text-[#666] uppercase tracking-[0.1em]">
+                <Label className="text-[11px] text-slate-500 uppercase tracking-[0.08em] font-semibold">
                   {CAT_LABELS[k] || k}
                 </Label>
                 <Select
@@ -139,13 +189,13 @@ export default function Predict() {
                 >
                   <SelectTrigger
                     data-testid={`select-${k}`}
-                    className="rounded-none border-[#E5E5E5] focus:ring-0 focus:border-[#002FA7]"
+                    className="rounded-lg border-slate-200 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400"
                   >
                     <SelectValue placeholder={`Select ${k}`} />
                   </SelectTrigger>
-                  <SelectContent className="rounded-none">
+                  <SelectContent className="rounded-lg">
                     {schema.categorical[k].map((opt) => (
-                      <SelectItem key={opt} value={String(opt)} className="rounded-none">
+                      <SelectItem key={opt} value={String(opt)} className="rounded-md">
                         {opt}
                       </SelectItem>
                     ))}
@@ -155,12 +205,12 @@ export default function Predict() {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-6 pt-5 border-t border-[#E5E5E5]">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-6 pt-5 border-t border-slate-100">
             <Button
               type="submit"
               disabled={loading}
               data-testid="predict-submit-button"
-              className="rounded-none bg-[#111] hover:bg-[#002FA7] text-white px-6 py-2.5 h-11 text-sm font-semibold tracking-wide transition-colors"
+              className="rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 h-11 text-sm font-semibold tracking-wide shadow-sm transition-colors"
             >
               {loading ? (
                 <>
@@ -177,9 +227,9 @@ export default function Predict() {
               onClick={resetDefaults}
               variant="outline"
               data-testid="predict-reset-button"
-              className="rounded-none border-[#E5E5E5] hover:bg-[#F7F7F8] h-11"
+              className="rounded-lg border-slate-200 hover:bg-slate-50 h-11 text-slate-700"
             >
-              Reset to Defaults
+              <RotateCcw className="w-4 h-4 mr-2" /> Reset to Defaults
             </Button>
           </div>
         </form>
@@ -188,75 +238,79 @@ export default function Predict() {
           {result ? (
             <>
               <div className="cs-card p-6" data-testid="predict-result">
-                <div className="overline-label">Churn Probability</div>
-                <div className="mt-3 flex items-baseline gap-2">
-                  <div
-                    className="font-[Manrope] font-black text-5xl tabular-nums leading-none"
-                    style={{ color: risk?.color || "#111" }}
-                    data-testid="predict-probability"
-                  >
-                    {result.churn_percent}%
-                  </div>
-                  <Badge
-                    data-testid="predict-risk-badge"
-                    className="rounded-none text-white hover:text-white px-2 py-1 text-xs"
-                    style={{ background: risk?.color, borderColor: risk?.color }}
-                  >
-                    {risk?.label}
-                  </Badge>
+                <div className="flex items-center justify-between">
+                  <div className="overline-label">Churn Probability</div>
+                  <RiskPill risk={result.risk_level} testid="predict-risk-badge" />
                 </div>
-                <Progress
-                  value={result.churn_percent}
-                  className="h-2 mt-4 rounded-none bg-[#F0F0F2]"
-                />
-                <div className="text-xs text-[#666] mt-3 font-mono">
-                  Prediction: <span className="text-[#111] font-semibold">{result.prediction}</span> ·
-                  Model: {result.model_used}
+                <Gauge percent={result.churn_percent} color={riskColor} label={result.prediction} />
+                <div className="text-[11px] text-slate-500 mt-3 font-mono text-center">
+                  Model: <span className="text-slate-700 font-semibold">{result.model_used}</span>
                 </div>
               </div>
 
               <div className="cs-card p-6" data-testid="predict-drivers">
-                <div className="overline-label mb-3">Top drivers</div>
+                <div className="overline-label mb-4">Top drivers</div>
                 {result.drivers.length === 0 ? (
-                  <p className="text-sm text-[#666]">No positive-contribution drivers for this profile.</p>
+                  <p className="text-sm text-slate-500">
+                    No positive-contribution drivers for this profile — the customer looks safe on every lever we track.
+                  </p>
                 ) : (
-                  <ol className="space-y-3">
+                  <ul className="space-y-3">
                     {result.drivers.map((d, i) => (
-                      <li key={d.feature} className="flex gap-3" data-testid={`driver-${i}`}>
-                        <div className="w-6 h-6 bg-[#111] text-white grid place-items-center font-mono text-xs shrink-0">
+                      <li
+                        key={d.feature}
+                        className="group rounded-lg border border-slate-100 bg-slate-50/60 hover:bg-white hover:border-slate-200 transition-colors p-3 flex gap-3"
+                        data-testid={`driver-${i}`}
+                      >
+                        <div className="w-7 h-7 rounded-full bg-indigo-600 text-white grid place-items-center font-mono text-xs shrink-0">
                           {i + 1}
                         </div>
-                        <div className="min-w-0">
-                          <div className="font-mono text-xs text-[#002FA7] break-all">{d.feature}</div>
-                          <div className="text-sm leading-snug mt-0.5">{d.explanation}</div>
+                        <div className="min-w-0 flex-1">
+                          <div className="font-semibold text-sm text-slate-900">
+                            {prettyFeature(d.feature)}
+                          </div>
+                          <div className="text-xs text-slate-600 leading-snug mt-1">{d.explanation}</div>
                         </div>
                       </li>
                     ))}
-                  </ol>
+                  </ul>
                 )}
               </div>
 
-              <div className="cs-card p-6 bg-[#111] text-white" data-testid="predict-action">
-                <div className="overline-label text-white/60">Suggested retention action</div>
-                <p className="font-[Manrope] font-semibold text-lg mt-2 leading-snug">
-                  {result.suggested_action}
-                </p>
+              <div
+                className="rounded-xl p-6 text-white relative overflow-hidden"
+                style={{ background: "linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)" }}
+                data-testid="predict-action"
+              >
+                <div className="flex items-start gap-3 relative">
+                  <div className="w-9 h-9 rounded-lg bg-white/15 grid place-items-center shrink-0">
+                    <Lightbulb className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase tracking-[0.16em] text-white/70 font-semibold">
+                      Suggested retention action
+                    </div>
+                    <p className="font-[Manrope] font-semibold text-lg mt-1.5 leading-snug">
+                      {result.suggested_action}
+                    </p>
+                  </div>
+                </div>
               </div>
             </>
           ) : (
             <div
-              className="cs-card p-8 flex flex-col items-center justify-center text-center h-full min-h-[360px]"
+              className="cs-card p-8 flex flex-col items-center justify-center text-center h-full min-h-[400px]"
               data-testid="predict-empty"
             >
-              <div className="w-14 h-14 border border-[#E5E5E5] grid place-items-center mb-4">
-                <Sparkles className="w-6 h-6 text-[#002FA7]" />
+              <div className="w-14 h-14 rounded-xl bg-indigo-50 text-indigo-600 grid place-items-center mb-4">
+                <Sparkles className="w-6 h-6" />
               </div>
-              <h3 className="font-[Manrope] font-semibold text-xl tracking-tight">
+              <h3 className="font-[Manrope] font-semibold text-xl tracking-tight text-slate-900">
                 Awaiting prediction
               </h3>
-              <p className="text-sm text-[#666] mt-2 max-w-xs">
+              <p className="text-sm text-slate-500 mt-2 max-w-xs leading-relaxed">
                 Fill out the customer profile on the left and click <b>Predict Churn</b> to score them.
-                You'll get a probability, risk level, top drivers in plain English, and a retention tip.
+                You'll get a probability gauge, risk tier, top drivers in plain English, and a retention tip.
               </p>
             </div>
           )}

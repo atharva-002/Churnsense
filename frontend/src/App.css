@@ -1,12 +1,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
 
 :root {
+  /* Palette */
+  --cs-bg: #F8FAFC;             /* slate-50 */
+  --cs-surface: #FFFFFF;
+  --cs-border: #E5E7EB;         /* gray-200 */
+  --cs-border-soft: #F1F5F9;    /* slate-100 */
+  --cs-text: #0F172A;           /* slate-900 */
+  --cs-text-muted: #64748B;     /* slate-500 */
+  --cs-text-faint: #94A3B8;     /* slate-400 */
+  --cs-primary: #4F46E5;        /* indigo-600 */
+  --cs-primary-soft: #EEF2FF;   /* indigo-50 */
+  --cs-primary-700: #4338CA;
+  --cs-churn: #EF4444;          /* red-500 */
+  --cs-churn-soft: #FEF2F2;
+  --cs-retain: #10B981;         /* emerald-500 */
+  --cs-retain-soft: #ECFDF5;
+  --cs-warn: #F59E0B;           /* amber-500 */
+  --cs-warn-soft: #FFFBEB;
+
+  --cs-radius: 12px;
+  --cs-radius-sm: 8px;
+  --cs-shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 3px 0 rgb(15 23 42 / 0.05);
+  --cs-shadow-md: 0 4px 10px -2px rgb(15 23 42 / 0.06), 0 2px 6px -3px rgb(15 23 42 / 0.08);
+  --cs-shadow-lg: 0 10px 24px -8px rgb(15 23 42 / 0.12);
+
   font-family: "IBM Plex Sans", system-ui, sans-serif;
 }
 
 body {
-  background: #f7f7f8;
-  color: #111;
+  background: var(--cs-bg);
+  color: var(--cs-text);
   font-family: "IBM Plex Sans", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -15,63 +39,113 @@ body {
 h1, h2, h3, h4, h5 {
   font-family: "Manrope", system-ui, sans-serif;
   letter-spacing: -0.02em;
+  color: var(--cs-text);
 }
 
 .font-mono, code, .tabular-nums {
   font-family: "JetBrains Mono", monospace;
 }
 
-/* Overline / eyebrow label */
+/* Eyebrow / overline */
 .overline-label {
   text-transform: uppercase;
   font-size: 10px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   font-weight: 600;
-  color: #666;
+  color: var(--cs-text-muted);
 }
 
-/* Flat, sharp cards (grid-style borders, no soft shadows) */
+/* Card system */
 .cs-card {
-  background: #ffffff;
-  border: 1px solid #e5e5e5;
+  background: var(--cs-surface);
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius);
+  box-shadow: var(--cs-shadow-sm);
+  transition: box-shadow 180ms ease, transform 180ms ease;
 }
-.cs-card:focus-within {
-  outline: 2px solid #002fa7;
-  outline-offset: -1px;
+.cs-card--flat {
+  box-shadow: none;
 }
-
-.cs-grid {
-  background: #e5e5e5;
-  display: grid;
-  gap: 1px;
-}
-.cs-grid > .cs-grid-item {
-  background: #ffffff;
+.cs-card--hover:hover {
+  box-shadow: var(--cs-shadow-md);
+  transform: translateY(-1px);
 }
 
-/* Subtle animated reveal for widgets */
+/* Pretty divider */
+.cs-divider {
+  height: 1px;
+  background: var(--cs-border);
+}
+
+/* Nav underline active */
+.cs-nav-item {
+  position: relative;
+  padding: 10px 2px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cs-text-muted);
+  transition: color 150ms ease;
+}
+.cs-nav-item:hover { color: var(--cs-text); }
+.cs-nav-item.active { color: var(--cs-primary); }
+.cs-nav-item.active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: var(--cs-primary);
+  border-radius: 2px;
+}
+
+/* Animated reveal */
 @keyframes cs-rise {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.cs-rise { animation: cs-rise 400ms ease-out both; }
+.cs-rise { animation: cs-rise 420ms cubic-bezier(0.16, 1, 0.3, 1) both; }
 
-/* Scrollbar polish on tables */
+/* Scrollbar polish */
 .cs-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
-.cs-scroll::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 2px; }
+.cs-scroll::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 999px; }
 .cs-scroll::-webkit-scrollbar-track { background: transparent; }
 
-/* High-contrast focus for interactive elements */
+/* Focus */
 button:focus-visible, a:focus-visible, [role="button"]:focus-visible {
-  outline: 2px solid #002fa7;
+  outline: 2px solid var(--cs-primary);
   outline-offset: 2px;
+  border-radius: 6px;
 }
 
-/* Hide file-input default style; we drive it with a button */
+/* Hidden file input */
 input[type="file"].cs-file {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  overflow: hidden;
+  width: 1px; height: 1px;
+  opacity: 0; overflow: hidden;
+}
+
+/* Risk pills */
+.risk-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+}
+.risk-pill.high  { background: var(--cs-churn-soft);  color: var(--cs-churn);  border-color: #FECACA; }
+.risk-pill.med   { background: var(--cs-warn-soft);   color: var(--cs-warn);   border-color: #FDE68A; }
+.risk-pill.low   { background: var(--cs-retain-soft); color: var(--cs-retain); border-color: #A7F3D0; }
+
+/* Drop zone */
+.cs-dropzone {
+  border: 1.5px dashed #CBD5E1;
+  border-radius: var(--cs-radius);
+  background: linear-gradient(180deg, rgba(238,242,255,0.4), rgba(238,242,255,0));
+  transition: border-color 160ms ease, background 160ms ease;
+}
+.cs-dropzone:hover,
+.cs-dropzone.is-dragging {
+  border-color: var(--cs-primary);
+  background: linear-gradient(180deg, rgba(238,242,255,0.9), rgba(238,242,255,0.2));
 }

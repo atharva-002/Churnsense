@@ -3,22 +3,23 @@ import { predictBatch, sampleCsvUrl } from "@/lib/api";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ChartCard } from "@/components/ChartCard";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Download, FileSpreadsheet, Loader2, UploadCloud, AlertTriangle, ShieldCheck, AlertCircle } from "lucide-react";
+import { Download, FileSpreadsheet, Loader2, UploadCloud, X } from "lucide-react";
 import { toast } from "sonner";
+import { RiskPill, RISK_COLOR } from "@/components/RiskPill";
 
-const RISK_COLOR = {
-  High: "#FF2A00",
-  Medium: "#FF5E00",
-  Low: "#046A38",
-};
-const RISK_ICON = { High: AlertTriangle, Medium: AlertCircle, Low: ShieldCheck };
+const SUMMARY_CARDS = [
+  { key: "rows", label: "Rows scored", color: "#4F46E5" },
+  { key: "high_risk", label: "High risk", color: RISK_COLOR.High },
+  { key: "medium_risk", label: "Medium risk", color: RISK_COLOR.Medium },
+  { key: "low_risk", label: "Low risk", color: RISK_COLOR.Low },
+];
 
 export default function BatchPredict() {
   const inputRef = useRef(null);
   const [file, setFile] = useState(null);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [dragging, setDragging] = useState(false);
 
   const handleFile = (f) => {
     if (!f) return;
@@ -28,6 +29,13 @@ export default function BatchPredict() {
     }
     setFile(f);
     setResult(null);
+  };
+
+  const onDrop = (e) => {
+    e.preventDefault();
+    setDragging(false);
+    const f = e.dataTransfer.files?.[0];
+    handleFile(f);
   };
 
   const onUpload = async () => {
@@ -58,8 +66,14 @@ export default function BatchPredict() {
     URL.revokeObjectURL(url);
   };
 
+  const clearFile = () => {
+    setFile(null);
+    setResult(null);
+    if (inputRef.current) inputRef.current.value = "";
+  };
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10" data-testid="batch-page">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10" data-testid="batch-page">
       <SectionHeader
         eyebrow="CSV in → predictions out"
         title="Batch Prediction"
@@ -69,7 +83,7 @@ export default function BatchPredict() {
           <a
             href={sampleCsvUrl}
             data-testid="batch-sample-download"
-            className="inline-flex items-center gap-2 px-3 py-2 text-xs font-semibold uppercase tracking-wide border border-[#E5E5E5] bg-white hover:bg-[#F7F7F8] transition-colors"
+            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold uppercase tracking-wide rounded-lg border border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 transition-colors text-slate-700 shadow-sm"
           >
             <FileSpreadsheet className="w-4 h-4" />
             Download sample CSV
@@ -78,22 +92,27 @@ export default function BatchPredict() {
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
-        <div
-          className="cs-card p-6 lg:col-span-2 flex flex-col"
-          data-testid="batch-upload-card"
-        >
+        <div className="cs-card p-6 lg:col-span-2 flex flex-col" data-testid="batch-upload-card">
           <div className="overline-label mb-3">Step 1 · Upload</div>
           <label
             htmlFor="batch-file"
-            className="border border-dashed border-[#C0C0C8] bg-[#FAFAFB] hover:bg-[#F0F0F2] transition-colors cursor-pointer px-6 py-10 flex flex-col items-center justify-center text-center flex-1"
+            onDragEnter={(e) => { e.preventDefault(); setDragging(true); }}
+            onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+            onDragLeave={() => setDragging(false)}
+            onDrop={onDrop}
+            className={`cs-dropzone cursor-pointer px-6 py-10 flex flex-col items-center justify-center text-center flex-1 ${dragging ? "is-dragging" : ""}`}
             data-testid="batch-dropzone"
           >
-            <UploadCloud className="w-10 h-10 text-[#002FA7] mb-3" />
-            <div className="font-[Manrope] font-semibold text-lg">
-              {file ? file.name : "Click to choose a CSV"}
+            <div className="w-14 h-14 rounded-xl bg-indigo-50 text-indigo-600 grid place-items-center mb-4">
+              <UploadCloud className="w-7 h-7" />
             </div>
-            <div className="text-xs text-[#666] mt-2">
-              {file ? `${(file.size / 1024).toFixed(1)} KB` : "Up to a few MB. Required columns match the Telco dataset."}
+            <div className="font-[Manrope] font-semibold text-lg text-slate-900">
+              {file ? file.name : "Drop a CSV here or click to browse"}
+            </div>
+            <div className="text-xs text-slate-500 mt-2 leading-relaxed max-w-xs">
+              {file
+                ? `${(file.size / 1024).toFixed(1)} KB · ready to score`
+                : "Up to a few MB. Required columns match the Telco dataset. Need a template? Grab the sample CSV above."}
             </div>
           </label>
           <input
@@ -105,46 +124,51 @@ export default function BatchPredict() {
             className="cs-file"
             onChange={(e) => handleFile(e.target.files?.[0])}
           />
-          <Button
-            type="button"
-            onClick={onUpload}
-            disabled={!file || loading}
-            data-testid="batch-submit-button"
-            className="rounded-none bg-[#111] hover:bg-[#002FA7] text-white h-11 mt-4 font-semibold tracking-wide transition-colors"
-          >
-            {loading ? (
-              <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Scoring batch…
-              </>
-            ) : (
-              <>
-                <UploadCloud className="w-4 h-4 mr-2" /> Score Batch
-              </>
+          <div className="flex items-center gap-2 mt-4">
+            <Button
+              type="button"
+              onClick={onUpload}
+              disabled={!file || loading}
+              data-testid="batch-submit-button"
+              className="flex-1 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white h-11 font-semibold tracking-wide shadow-sm transition-colors disabled:opacity-50"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Scoring batch…
+                </>
+              ) : (
+                <>
+                  <UploadCloud className="w-4 h-4 mr-2" /> Score Batch
+                </>
+              )}
+            </Button>
+            {file && (
+              <Button
+                type="button"
+                onClick={clearFile}
+                variant="outline"
+                data-testid="batch-clear-button"
+                className="rounded-lg border-slate-200 hover:bg-slate-50 h-11 w-11 p-0 text-slate-500"
+                aria-label="Clear file"
+              >
+                <X className="w-4 h-4" />
+              </Button>
             )}
-          </Button>
-          <p className="text-xs text-[#666] mt-3 leading-relaxed">
-            Tip: Not sure what columns to send? Grab the <b>sample CSV</b> (20 rows pulled from the
-            dataset without the Churn label) and upload it as-is.
-          </p>
+          </div>
         </div>
 
         <div className="lg:col-span-3 flex flex-col gap-4">
           {result ? (
             <>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[#E5E5E5] border border-[#E5E5E5]" data-testid="batch-summary">
-                {[
-                  { label: "Rows scored", value: result.summary.rows, color: "#111" },
-                  { label: "High risk", value: result.summary.high_risk, color: RISK_COLOR.High },
-                  { label: "Medium risk", value: result.summary.medium_risk, color: RISK_COLOR.Medium },
-                  { label: "Low risk", value: result.summary.low_risk, color: RISK_COLOR.Low },
-                ].map((kpi) => (
-                  <div key={kpi.label} className="bg-white p-5">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3" data-testid="batch-summary">
+                {SUMMARY_CARDS.map((kpi) => (
+                  <div key={kpi.key} className="cs-card p-4">
                     <div className="overline-label">{kpi.label}</div>
                     <div
-                      className="font-[Manrope] font-black text-3xl mt-3 tabular-nums"
+                      className="font-[Manrope] font-black text-2xl sm:text-3xl mt-3 tabular-nums"
                       style={{ color: kpi.color }}
                     >
-                      {kpi.value.toLocaleString()}
+                      {result.summary[kpi.key].toLocaleString()}
                     </div>
                   </div>
                 ))}
@@ -159,48 +183,50 @@ export default function BatchPredict() {
                     type="button"
                     onClick={downloadCsv}
                     data-testid="batch-download-button"
-                    className="rounded-none bg-[#046A38] hover:bg-[#035e32] text-white h-10 px-4 text-xs font-semibold tracking-wide"
+                    className="rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white h-10 px-4 text-xs font-semibold tracking-wide shadow-sm"
                   >
                     <Download className="w-4 h-4 mr-2" /> Download CSV
                   </Button>
                 }
               >
-                <div className="cs-scroll overflow-auto max-h-[480px] border border-[#E5E5E5]">
+                <div className="cs-scroll overflow-auto max-h-[480px] rounded-lg border border-slate-200">
                   <table className="min-w-full text-sm" data-testid="batch-table">
-                    <thead className="bg-[#F7F7F8] sticky top-0">
+                    <thead className="bg-slate-50 sticky top-0 z-10">
                       <tr>
                         {Object.keys(result.rows[0] || {}).map((h) => (
                           <th
                             key={h}
-                            className="text-left px-3 py-2 font-semibold text-[10px] uppercase tracking-[0.1em] text-[#666] border-b border-[#E5E5E5] whitespace-nowrap"
+                            className="text-left px-3 py-2.5 font-semibold text-[10px] uppercase tracking-[0.08em] text-slate-500 border-b border-slate-200 whitespace-nowrap"
                           >
-                            {h}
+                            {h.replace(/_/g, " ")}
                           </th>
                         ))}
                       </tr>
                     </thead>
                     <tbody>
-                      {result.rows.map((r, i) => {
-                        const Icon = RISK_ICON[r.risk_level];
-                        return (
-                          <tr key={i} className="border-b border-[#F0F0F2]" data-testid={`batch-row-${i}`}>
-                            {Object.entries(r).map(([k, v]) => (
-                              <td key={k} className="px-3 py-2 font-mono text-xs whitespace-nowrap">
-                                {k === "risk_level" ? (
-                                  <Badge
-                                    className="rounded-none text-white hover:text-white gap-1 px-2 py-0.5 text-[10px]"
-                                    style={{ background: RISK_COLOR[v], borderColor: RISK_COLOR[v] }}
-                                  >
-                                    {Icon ? <Icon className="w-3 h-3" /> : null} {v}
-                                  </Badge>
-                                ) : (
-                                  String(v)
-                                )}
-                              </td>
-                            ))}
-                          </tr>
-                        );
-                      })}
+                      {result.rows.map((r, i) => (
+                        <tr
+                          key={i}
+                          className={`border-b border-slate-100 last:border-b-0 ${i % 2 === 0 ? "bg-white" : "bg-slate-50/40"}`}
+                          data-testid={`batch-row-${i}`}
+                        >
+                          {Object.entries(r).map(([k, v]) => (
+                            <td key={k} className="px-3 py-2 font-mono text-xs whitespace-nowrap text-slate-700">
+                              {k === "risk_level" ? (
+                                <RiskPill risk={v} size="sm" labelOverride={v} />
+                              ) : k === "prediction" ? (
+                                <span
+                                  className={`font-semibold ${v === "Churn" ? "text-red-500" : "text-emerald-600"}`}
+                                >
+                                  {v}
+                                </span>
+                              ) : (
+                                String(v)
+                              )}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -211,13 +237,13 @@ export default function BatchPredict() {
               className="cs-card p-10 flex flex-col items-center justify-center text-center h-full min-h-[400px]"
               data-testid="batch-empty"
             >
-              <div className="w-14 h-14 border border-[#E5E5E5] grid place-items-center mb-4">
-                <FileSpreadsheet className="w-6 h-6 text-[#002FA7]" />
+              <div className="w-14 h-14 rounded-xl bg-indigo-50 text-indigo-600 grid place-items-center mb-4">
+                <FileSpreadsheet className="w-6 h-6" />
               </div>
-              <h3 className="font-[Manrope] font-semibold text-xl tracking-tight">
+              <h3 className="font-[Manrope] font-semibold text-xl tracking-tight text-slate-900">
                 No batch scored yet
               </h3>
-              <p className="text-sm text-[#666] mt-2 max-w-md leading-relaxed">
+              <p className="text-sm text-slate-500 mt-2 max-w-md leading-relaxed">
                 Upload a CSV with the Telco dataset columns and we'll return each customer's churn
                 probability, a risk tier, and a downloadable CSV with everything appended.
               </p>

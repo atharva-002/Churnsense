@@ -343,63 +343,78 @@
       "feature_importance": [
         {
           "feature": "tenure",
-          "importance": 1.2508
+          "importance": 1.2508,
+          "signed": -1.2508
         },
         {
           "feature": "Contract_Two year",
-          "importance": 0.7851
+          "importance": 0.7851,
+          "signed": -0.7851
         },
         {
           "feature": "Contract_Month-to-month",
-          "importance": 0.6922
+          "importance": 0.6922,
+          "signed": 0.6922
         },
         {
           "feature": "InternetService_Fiber optic",
-          "importance": 0.6481
+          "importance": 0.6481,
+          "signed": 0.6481
         },
         {
           "feature": "TotalCharges",
-          "importance": 0.6079
+          "importance": 0.6079,
+          "signed": 0.6079
         },
         {
           "feature": "MonthlyCharges",
-          "importance": 0.6067
+          "importance": 0.6067,
+          "signed": -0.6067
         },
         {
           "feature": "InternetService_DSL",
-          "importance": 0.5895
+          "importance": 0.5895,
+          "signed": -0.5895
         },
         {
           "feature": "InternetService_No",
-          "importance": 0.2598
+          "importance": 0.2598,
+          "signed": -0.2598
         },
         {
-          "feature": "OnlineSecurity_No internet service",
-          "importance": 0.2598
-        },
-        {
-          "feature": "OnlineBackup_No internet service",
-          "importance": 0.2598
-        },
-        {
-          "feature": "DeviceProtection_No internet service",
-          "importance": 0.2598
-        },
-        {
-          "feature": "TechSupport_No internet service",
-          "importance": 0.2598
-        },
-        {
-          "feature": "StreamingTV_No internet service",
-          "importance": 0.2598
-        },
-        {
-          "feature": "StreamingMovies_No internet service",
-          "importance": 0.2598
+          "feature": "No internet service",
+          "importance": 0.2598,
+          "signed": -0.2598
         },
         {
           "feature": "StreamingTV_Yes",
-          "importance": 0.2427
+          "importance": 0.2427,
+          "signed": 0.2427
+        },
+        {
+          "feature": "MultipleLines_No",
+          "importance": 0.2424,
+          "signed": -0.2424
+        },
+        {
+          "feature": "StreamingMovies_Yes",
+          "importance": 0.2356,
+          "signed": 0.2356
+        },
+        {
+          "feature": "PaperlessBilling_No",
+          "importance": 0.2277,
+          "signed": -0.2277
+        },
+        {
+          "feature": "PaymentMethod_Electronic check",
+          "importance": 0.2251,
+          "signed": 0.2251
+        },
+        {
+          "feature": "Dependents_Yes",
+          "importance": 0.2138,
+          "signed": -0.2138
         }
       ]
     },
@@ -745,63 +760,78 @@
       "feature_importance": [
         {
           "feature": "Contract_Month-to-month",
-          "importance": 0.376
+          "importance": 0.376,
+          "signed": 0.376
         },
         {
           "feature": "InternetService_Fiber optic",
-          "importance": 0.1046
+          "importance": 0.1046,
+          "signed": 0.1046
         },
         {
           "feature": "OnlineSecurity_No",
-          "importance": 0.0678
+          "importance": 0.0678,
+          "signed": 0.0678
         },
         {
           "feature": "Contract_Two year",
-          "importance": 0.0314
+          "importance": 0.0314,
+          "signed": 0.0314
         },
         {
           "feature": "InternetService_No",
-          "importance": 0.0269
+          "importance": 0.0269,
+          "signed": 0.0269
         },
         {
           "feature": "InternetService_DSL",
-          "importance": 0.026
+          "importance": 0.026,
+          "signed": 0.026
         },
         {
           "feature": "TechSupport_No",
-          "importance": 0.0249
+          "importance": 0.0249,
+          "signed": 0.0249
         },
         {
           "feature": "Contract_One year",
-          "importance": 0.0239
+          "importance": 0.0239,
+          "signed": 0.0239
         },
         {
           "feature": "PhoneService_Yes",
-          "importance": 0.0207
+          "importance": 0.0207,
+          "signed": 0.0207
         },
         {
           "feature": "StreamingMovies_Yes",
-          "importance": 0.0184
+          "importance": 0.0184,
+          "signed": 0.0184
         },
         {
           "feature": "PaymentMethod_Electronic check",
-          "importance": 0.0154
+          "importance": 0.0154,
+          "signed": 0.0154
         },
         {
           "feature": "tenure",
-          "importance": 0.0154
+          "importance": 0.0154,
+          "signed": 0.0154
         },
         {
           "feature": "StreamingTV_Yes",
-          "importance": 0.0138
+          "importance": 0.0138,
+          "signed": 0.0138
         },
         {
           "feature": "PhoneService_No",
-          "importance": 0.0137
+          "importance": 0.0137,
+          "signed": 0.0137
         },
         {
           "feature": "OnlineBackup_No",
-          "importance": 0.013
+          "importance": 0.013,
+          "signed": 0.013
         }
       ]
     },
@@ -1147,63 +1177,78 @@
       "feature_importance": [
         {
           "feature": "tenure",
-          "importance": 0.1255
+          "importance": 0.1255,
+          "signed": 0.1255
         },
         {
           "feature": "TotalCharges",
-          "importance": 0.113
+          "importance": 0.113,
+          "signed": 0.113
         },
         {
           "feature": "Contract_Month-to-month",
-          "importance": 0.1093
+          "importance": 0.1093,
+          "signed": 0.1093
         },
         {
           "feature": "MonthlyCharges",
-          "importance": 0.0908
+          "importance": 0.0908,
+          "signed": 0.0908
         },
         {
           "feature": "Contract_Two year",
-          "importance": 0.052
+          "importance": 0.052,
+          "signed": 0.052
         },
         {
           "feature": "OnlineSecurity_No",
-          "importance": 0.0507
+          "importance": 0.0507,
+          "signed": 0.0507
         },
         {
           "feature": "TechSupport_No",
-          "importance": 0.0378
+          "importance": 0.0378,
+          "signed": 0.0378
         },
         {
           "feature": "InternetService_Fiber optic",
-          "importance": 0.037
+          "importance": 0.037,
+          "signed": 0.037
         },
         {
           "feature": "PaymentMethod_Electronic check",
-          "importance": 0.0329
+          "importance": 0.0329,
+          "signed": 0.0329
         },
         {
           "feature": "Contract_One year",
-          "importance": 0.0177
+          "importance": 0.0177,
+          "signed": 0.0177
         },
         {
           "feature": "OnlineBackup_No",
-          "importance": 0.0177
+          "importance": 0.0177,
+          "signed": 0.0177
         },
         {
           "feature": "InternetService_DSL",
-          "importance": 0.0148
+          "importance": 0.0148,
+          "signed": 0.0148
         },
         {
           "feature": "DeviceProtection_No",
-          "importance": 0.0139
+          "importance": 0.0139,
+          "signed": 0.0139
         },
         {
           "feature": "OnlineSecurity_Yes",
-          "importance": 0.0135
+          "importance": 0.0135,
+          "signed": 0.0135
         },
         {
           "feature": "PaperlessBilling_Yes",
-          "importance": 0.0126
+          "importance": 0.0126,
+          "signed": 0.0126
         }
       ]
     }

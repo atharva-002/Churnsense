@@ -157,7 +157,11 @@ def evaluate(model, X_test, y_test) -> dict:
 
 
 def feature_importance(pipeline: Pipeline, model_name: str) -> list[dict]:
-    """Return top feature importances (descending). Works for tree & linear models."""
+    """
+    Return top features with both signed (direction) and absolute importance.
+    Collapses redundant "No internet service" / "No phone service" one-hots
+    into a single aggregated row so the chart isn't flooded with duplicates.
+    """
     pre: ColumnTransformer = pipeline.named_steps["pre"]
     clf = pipeline.named_steps["clf"]
     try:
@@ -165,20 +169,42 @@ def feature_importance(pipeline: Pipeline, model_name: str) -> list[dict]:
     except Exception:
         names = NUMERIC_COLS + CATEGORICAL_COLS
 
-    if hasattr(clf, "feature_importances_"):
-        importances = clf.feature_importances_
-    elif hasattr(clf, "coef_"):
-        importances = np.abs(clf.coef_).ravel()
+    if hasattr(clf, "coef_"):
+        signed = clf.coef_.ravel().astype(float)
+    elif hasattr(clf, "feature_importances_"):
+        # tree models — no sign; use importance as magnitude only
+        signed = clf.feature_importances_.astype(float)
     else:
         return []
 
-    pairs = list(zip(names, importances))
-    pairs.sort(key=lambda x: x[1], reverse=True)
-    # clean up names: strip prefixes "num__" / "cat__"
+    # Build a map of raw name -> signed value (stripping "num__"/"cat__")
+    raw: list[tuple[str, float]] = []
+    for name, val in zip(names, signed):
+        pretty = name.replace("num__", "").replace("cat__", "")
+        raw.append((pretty, float(val)))
+
+    # Collapse redundant dummies into single aggregated rows (keep most-extreme signed value)
+    aggregated: dict[str, float] = {}
+    for pretty, val in raw:
+        if pretty.endswith("_No internet service"):
+            key = "No internet service"
+        elif pretty.endswith("_No phone service"):
+            key = "No phone service"
+        else:
+            key = pretty
+        if key not in aggregated or abs(val) > abs(aggregated[key]):
+            aggregated[key] = val
+
+    pairs = list(aggregated.items())
+    pairs.sort(key=lambda x: abs(x[1]), reverse=True)
+
     cleaned = []
     for name, val in pairs[:15]:
-        pretty = name.replace("num__", "").replace("cat__", "")
-        cleaned.append({"feature": pretty, "importance": round(float(val), 4)})
+        cleaned.append({
+            "feature": name,
+            "importance": round(abs(val), 4),
+            "signed": round(val, 4),
+        })
     return cleaned
 
 

@@ -58,6 +58,7 @@ _best_fi = next(
     [],
 )
 IMPORTANCE_MAP: dict[str, float] = {row["feature"]: row["importance"] for row in _best_fi}
+SIGNED_MAP: dict[str, float] = {row["feature"]: row.get("signed", row["importance"]) for row in _best_fi}
 
 # Load the training stats once (used for z-scored driver explanations)
 _df_stats = pd.read_csv(ROOT_DIR / "data" / "Telco-Customer-Churn.csv")
@@ -148,27 +149,28 @@ def _suggest_action(risk: str, drivers: list[dict]) -> str:
 
 
 def _explain(customer: dict[str, Any]) -> list[dict]:
-    """Top drivers via importance * presence (categoricals) or importance * z-score (numerics)."""
+    """Top drivers via importance * presence (categoricals) or importance * z-score (numerics).
+    Uses signed coefficients (when available) to decide which direction is "pushes to churn".
+    """
     drivers: list[dict] = []
     for feat_name, importance in IMPORTANCE_MAP.items():
+        signed = SIGNED_MAP.get(feat_name, importance)
         contribution = 0.0
-        display = feat_name
         if feat_name in NUMERIC_COLS:
             stats = NUMERIC_STATS[feat_name]
             z = (float(customer[feat_name]) - stats["mean"]) / stats["std"]
-            direction = -1.0 if feat_name in ("tenure", "TotalCharges") else 1.0
-            contribution = importance * z * direction
-        else:
-            if "_" in feat_name:
-                col, val = feat_name.split("_", 1)
-                if col in CATEGORICAL_COLS and str(customer.get(col)) == val:
-                    contribution = importance
+            # positive signed coef => higher value pushes to churn; negative => protective
+            contribution = signed * z
+        elif "_" in feat_name:
+            col, val = feat_name.split("_", 1)
+            if col in CATEGORICAL_COLS and str(customer.get(col)) == val:
+                contribution = signed
         if contribution <= 0:
             continue
         drivers.append({
-            "feature": display,
+            "feature": feat_name,
             "contribution": round(float(contribution), 4),
-            "explanation": _PLAIN_ENGLISH.get(display, f"{display} contributes to churn risk."),
+            "explanation": _PLAIN_ENGLISH.get(feat_name, f"{feat_name} contributes to churn risk."),
         })
 
     drivers.sort(key=lambda d: d["contribution"], reverse=True)
