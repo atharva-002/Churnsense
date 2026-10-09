@@ -3,7 +3,7 @@
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "framework": "create-react-app",
-  "buildCommand": "yarn build",
+  "buildCommand": "CI=false yarn build",
   "outputDirectory": "build",
-  "installCommand": "yarn install --frozen-lockfile=false"
+  "installCommand": "yarn install"
 }
