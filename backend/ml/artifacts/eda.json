@@ -1,0 +1,163 @@
+{
+  "total_customers": 7032,
+  "churned_customers": 1869,
+  "retained_customers": 5163,
+  "churn_rate": 26.58,
+  "avg_tenure": 32.42,
+  "avg_monthly_charges": 64.8,
+  "avg_total_charges": 2283.3,
+  "by_contract": [
+    {
+      "label": "Month-to-month",
+      "customers": 3875,
+      "churned": 1655,
+      "churn_rate": 42.71
+    },
+    {
+      "label": "One year",
+      "customers": 1472,
+      "churned": 166,
+      "churn_rate": 11.28
+    },
+    {
+      "label": "Two year",
+      "customers": 1685,
+      "churned": 48,
+      "churn_rate": 2.85
+    }
+  ],
+  "by_internet_service": [
+    {
+      "label": "DSL",
+      "customers": 2416,
+      "churned": 459,
+      "churn_rate": 19.0
+    },
+    {
+      "label": "Fiber optic",
+      "customers": 3096,
+      "churned": 1297,
+      "churn_rate": 41.89
+    },
+    {
+      "label": "No",
+      "customers": 1520,
+      "churned": 113,
+      "churn_rate": 7.43
+    }
+  ],
+  "by_payment_method": [
+    {
+      "label": "Bank transfer (automatic)",
+      "customers": 1542,
+      "churned": 258,
+      "churn_rate": 16.73
+    },
+    {
+      "label": "Credit card (automatic)",
+      "customers": 1521,
+      "churned": 232,
+      "churn_rate": 15.25
+    },
+    {
+      "label": "Electronic check",
+      "customers": 2365,
+      "churned": 1071,
+      "churn_rate": 45.29
+    },
+    {
+      "label": "Mailed check",
+      "customers": 1604,
+      "churned": 308,
+      "churn_rate": 19.2
+    }
+  ],
+  "by_tenure_band": [
+    {
+      "label": "0-12",
+      "customers": 2175,
+      "churned": 1037,
+      "churn_rate": 47.68
+    },
+    {
+      "label": "13-24",
+      "customers": 1024,
+      "churned": 294,
+      "churn_rate": 28.71
+    },
+    {
+      "label": "25-48",
+      "customers": 1594,
+      "churned": 325,
+      "churn_rate": 20.39
+    },
+    {
+      "label": "49-60",
+      "customers": 832,
+      "churned": 120,
+      "churn_rate": 14.42
+    },
+    {
+      "label": "60+",
+      "customers": 1407,
+      "churned": 93,
+      "churn_rate": 6.61
+    }
+  ],
+  "monthly_charges_hist": [
+    {
+      "range": "18-28",
+      "customers": 1600
+    },
+    {
+      "range": "28-38",
+      "customers": 191
+    },
+    {
+      "range": "38-48",
+      "customers": 365
+    },
+    {
+      "range": "48-58",
+      "customers": 637
+    },
+    {
+      "range": "58-68",
+      "customers": 472
+    },
+    {
+      "range": "68-79",
+      "customers": 894
+    },
+    {
+      "range": "79-89",
+      "customers": 952
+    },
+    {
+      "range": "89-99",
+      "customers": 869
+    },
+    {
+      "range": "99-109",
+      "customers": 758
+    },
+    {
+      "range": "109-119",
+      "customers": 294
+    }
+  ],
+  "by_senior_citizen": [
+    {
+      "label": "0.0",
+      "customers": 5890,
+      "churned": 1393,
+      "churn_rate": 23.65
+    },
+    {
+      "label": "1.0",
+      "customers": 1142,
+      "churned": 476,
+      "churn_rate": 41.68
+    }
+  ]
+}

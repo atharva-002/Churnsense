@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "framework": "create-react-app",
+  "buildCommand": "CI=false yarn build",
+  "outputDirectory": "build",
+  "installCommand": "yarn install"
+}
